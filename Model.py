@@ -18,7 +18,7 @@ random.seed(42)
 df = pd.read_csv(file_path, on_bad_lines='skip', skiprows=lambda i: i > 0 and random.random() > (sample_size / 100000))
 
 # Filling missing values for Hotel Details with 'Not Available'
-df['Hotel Details'].fillna('Not Available', inplace=True)
+df['Hotel Details'].dropna(inplace=True)
 
 # Filling missing values for Airline with 'Not Available'
 df['Airline'].fillna('Not Available', inplace=True)
@@ -35,7 +35,7 @@ df['Initial Payment For Booking'].fillna(0, inplace=True)
 # Filling missing values for Cancellation Rules with 'Not Available'
 df['Cancellation Rules'].fillna('Not Available', inplace=True)
 
-# Dropping columns with all missing values (Flight Stops, Date Change Rules, Unnamed: 22, Unnamed: 23)
+# Dropping columns with all missing values (Flight Stops, Date Change Rules)
 df.drop(columns=["Flight Stops", "Meals", "Initial Payment For Booking", "Date Change Rules"], inplace=True)
 df['Travel Date'] = pd.to_datetime(df['Travel Date'], format='%d-%m-%Y', errors='coerce')
 allowed_package_types = ['Deluxe', 'Standard', 'Premium', 'Luxury', 'Budget']
@@ -44,8 +44,6 @@ allowed_package_types = ['Deluxe', 'Standard', 'Premium', 'Luxury', 'Budget']
 df = df[df['Package Type'].isin(allowed_package_types)]
 df.drop('Company', axis=1, inplace=True)
 df.drop('Crawl Timestamp', axis=1, inplace=True)
-
-
 
 # Load the dataset
 data = df
