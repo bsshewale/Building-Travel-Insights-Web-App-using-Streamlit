@@ -8,7 +8,7 @@ import streamlit as st
 import random
 
 # Load the dataset
-file_path = 'H:\Building-Travel-Insights-Web-App-using-Streamlit\dataset.csv.csv'
+file_path = 'H:\Building-Travel-Insights-Web-App-using-Streamlit\datasets\dataset.csv'
 sample_size = 5000  # Adjust the sample size as needed
 
 # Set a random seed for reproducibility
@@ -18,7 +18,7 @@ random.seed(42)
 df = pd.read_csv(file_path, on_bad_lines='skip', skiprows=lambda i: i > 0 and random.random() > (sample_size / 100000))
 
 # Filling missing values for Hotel Details with 'Not Available'
-df['Hotel Details'].dropna(inplace=True)
+df['Hotel Details'].fillna('Not Available', inplace=True)
 
 # Filling missing values for Airline with 'Not Available'
 df['Airline'].fillna('Not Available', inplace=True)

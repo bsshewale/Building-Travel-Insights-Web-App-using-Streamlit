@@ -3,6 +3,26 @@ import streamlit as st
 import pandas as pd
 from Model import get_hotel_recommendations, df
 
+import logging
+
+# Initialize the logger
+logging.basicConfig(
+    filename='app.log',
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
+logger = logging.getLogger(__name__)
+
+# Function to log user feedback
+def log_feedback(feedback_data):
+    try:
+        # Log the user feedback to a file
+        with open('feedback.log', 'a') as feedback_file:
+            feedback_file.write(f"{feedback_data}\n")
+        logger.info("User feedback logged successfully.")
+    except Exception as e:
+        logger.error(f"Error logging user feedback: {str(e)}")
+
 st.title('Hotel Recommendation App')
 
 # Create dropdowns for Package Type, Start City, and Destination
@@ -24,6 +44,14 @@ if st.button('Get Recommendations'):
         st.warning(recommended_hotels)
     else:
         st.table(recommended_hotels)
+
+# Collect user feedback
+st.write("Provide feedback:")
+feedback_input = st.text_area("Enter your feedback here:")
+if st.button("Submit Feedback"):
+    if feedback_input:
+        log_feedback(feedback_input)
+        st.success("Thank you for your feedback!")
 
 # Optionally, you can display some information about the selected filters
 st.write('Selected Filters:')
