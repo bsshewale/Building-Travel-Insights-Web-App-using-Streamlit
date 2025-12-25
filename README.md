@@ -87,7 +87,7 @@ pip install -r requirements.txt
 4. Run the Streamlit app:
 
 ```bash
-streamlit run Streamlit.py
+streamlit run streamlit_app.py
 ```
 
 5. Open browser and visit:
