@@ -35,12 +35,29 @@ This project is a **Streamlit-based web application** developed to display **dat
 ## Project Structure
 
 ```
-├── Streamlit.py          # Main Streamlit application
-├── Model.py              # Model loading / prediction logic
-├── dataset.csv.csv       # Dataset used for analysis
-├── requirements.txt      # Project dependencies
-├── README.md             # Project documentation
-├── myenv/                # Virtual environment
+project-root/
+│
+├── app/
+│   └── streamlit_app.py
+│
+├── src/
+│   ├── __init__.py
+│   ├── data_loader.py
+│   ├── preprocessing.py
+│   ├── model.py
+│
+├── data/
+│   └── raw/
+│       └── dataset.csv   
+│
+├── logs/                
+│
+├── .dockerignore
+├── .gitignore
+├── Dockerfile
+├── requirements.txt
+└── README.md
+
 ```
 
 ---
